@@ -22,17 +22,20 @@ class User implements UserInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * 
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      * 
+     * 
      */
     private $email;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * 
      */
     private $username;
 
