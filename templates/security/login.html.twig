@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %} {% block title %}Connexion{% endblock %} {% block
+body %}
+
+<h1>Connexion</h1>
+
+<form action="{{ path('security_login') }}" method="post">
+  <input placeholder="adresse email" name="_username" type="text" />
+  <input placeholder="mot de passe" name="_password" type="password" />
+  <button type="submit">Connexion</button>
+</form>
+
+{% endblock %}
