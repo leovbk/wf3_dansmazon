@@ -5443,7 +5443,7 @@
       <argument type="service" id="security.untracked_token_storage"/>
       <argument type="iterator">
         <argument type="service" id="security.user.provider.concrete.users_in_memory"/>
-        <argument type="service" id="security.user.provider.concrete.in_database"/>
+        <argument type="service" id="security.user.provider.concrete.app_user_provider"/>
       </argument>
       <argument type="abstract">Provider Key</argument>
       <argument type="service" id="monolog.logger.security" on-invalid="null"/>
@@ -5751,7 +5751,7 @@
     <service id="security.user.provider.concrete.users_in_memory" class="Symfony\Component\Security\Core\User\InMemoryUserProvider">
       <argument type="collection"/>
     </service>
-    <service id="security.user.provider.concrete.in_database" class="Symfony\Bridge\Doctrine\Security\User\EntityUserProvider">
+    <service id="security.user.provider.concrete.app_user_provider" class="Symfony\Bridge\Doctrine\Security\User\EntityUserProvider">
       <argument type="service" id="doctrine"/>
       <argument>App\Entity\User</argument>
       <argument>email</argument>
@@ -5760,7 +5760,7 @@
     <service id="security.user_providers" class="Symfony\Component\Security\Core\User\ChainUserProvider">
       <argument type="iterator">
         <argument type="service" id="security.user.provider.concrete.users_in_memory"/>
-        <argument type="service" id="security.user.provider.concrete.in_database"/>
+        <argument type="service" id="security.user.provider.concrete.app_user_provider"/>
       </argument>
     </service>
     <service id="security.firewall.map.config.dev" class="Symfony\Bundle\SecurityBundle\Security\FirewallConfig">
@@ -5792,7 +5792,7 @@
       <argument>null</argument>
       <argument>true</argument>
       <argument>false</argument>
-      <argument>security.user.provider.concrete.in_database</argument>
+      <argument>security.user.provider.concrete.app_user_provider</argument>
       <argument>main</argument>
       <argument>security.authenticator.form_login.main</argument>
       <argument>null</argument>
@@ -5804,7 +5804,7 @@
     </service>
     <service id="security.listener.main.user_provider" class="Symfony\Component\Security\Http\EventListener\UserProviderListener">
       <tag name="kernel.event_listener" dispatcher="security.event_dispatcher.main" event="Symfony\Component\Security\Http\Event\CheckPassportEvent" priority="2048" method="checkPassport"/>
-      <argument type="service" id="security.user.provider.concrete.in_database"/>
+      <argument type="service" id="security.user.provider.concrete.app_user_provider"/>
     </service>
     <service id="security.event_dispatcher.main" class="Symfony\Component\EventDispatcher\EventDispatcher">
       <tag name="security.event_dispatcher.main">event_dispatcher.dispatcher</tag>
@@ -5903,7 +5903,7 @@
       <argument type="service" id="security.untracked_token_storage"/>
       <argument type="iterator">
         <argument type="service" id="security.user.provider.concrete.users_in_memory"/>
-        <argument type="service" id="security.user.provider.concrete.in_database"/>
+        <argument type="service" id="security.user.provider.concrete.app_user_provider"/>
       </argument>
       <argument>main</argument>
       <argument type="service" id="monolog.logger.security" on-invalid="null"/>
@@ -5931,14 +5931,14 @@
     <service id="security.logout.listener.default.main" class="Symfony\Component\Security\Http\EventListener\DefaultLogoutListener">
       <tag name="kernel.event_subscriber" dispatcher="security.event_dispatcher.main"/>
       <argument type="service" id="security.http_utils"/>
-      <argument>security_registration</argument>
+      <argument>/</argument>
     </service>
     <service id="security.logout.listener.session.main" class="Symfony\Component\Security\Http\EventListener\SessionLogoutListener">
       <tag name="kernel.event_subscriber" dispatcher="security.event_dispatcher.main"/>
     </service>
     <service id="security.authenticator.form_login.main" class="Symfony\Component\Security\Http\Authenticator\FormLoginAuthenticator">
       <argument type="service" id="security.http_utils"/>
-      <argument type="service" id="security.user.provider.concrete.in_database"/>
+      <argument type="service" id="security.user.provider.concrete.app_user_provider"/>
       <argument type="service" id="security.authentication.success_handler.main.form_login"/>
       <argument type="service" id="security.authentication.failure_handler.main.form_login"/>
       <argument type="collection">
@@ -5961,7 +5961,7 @@
       <call method="setOptions">
         <argument type="collection">
           <argument key="login_path">security_login</argument>
-          <argument key="default_target_path">security_registration</argument>
+          <argument key="default_target_path">/</argument>
           <argument key="always_use_default_target_path">false</argument>
           <argument key="target_path_parameter">_target_path</argument>
           <argument key="use_referer">false</argument>
@@ -6708,6 +6708,10 @@
         <argument key="loader" type="service_closure" id=".errored..service_locator.KfbR3DY.Symfony\Component\Config\Loader\LoaderInterface"/>
       </argument>
     </service>
+    <service id=".service_locator.zC.2RPT" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection"/>
+    </service>
     <service id=".service_locator..tt6s91" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -6715,7 +6719,7 @@
         <argument key="encoder" type="service_closure" id="security.user_password_encoder.generic"/>
       </argument>
     </service>
-    <service id=".service_locator.JdbTVH9" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.svjQA0z" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\SecurityController::registration" type="service_closure" id=".service_locator..tt6s91"/>
@@ -7330,12 +7334,12 @@
       <argument type="service" id="security.token_storage"/>
     </service>
     <service id="debug.argument_resolver.service.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
-      <argument type="service" id=".service_locator.JdbTVH9"/>
+      <argument type="service" id=".service_locator.svjQA0z"/>
     </service>
     <service id="debug.argument_resolver.default.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver"/>
     <service id="debug.argument_resolver.variadic.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver"/>
     <service id="debug.argument_resolver.not_tagged_controller.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
-      <argument type="service" id=".service_locator.JdbTVH9"/>
+      <argument type="service" id=".service_locator.svjQA0z"/>
     </service>
     <service id="debug.traced.messenger.bus.default.inner" class="Symfony\Component\Messenger\MessageBus">
       <argument type="iterator">
@@ -8310,7 +8314,7 @@
     <service id="sensio_framework_extra.security.expression_language" alias="sensio_framework_extra.security.expression_language.default"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.gSv9zYw" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.JdbTVH9"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.svjQA0z"/>
     <service id="session" alias=".session.do-not-use" public="true">
       <deprecated package="symfony/framework-bundle" version="5.3">The "%alias_id%" service and "SessionInterface" alias are deprecated, use "$requestStack-&gt;getSession()" instead.</deprecated>
     </service>
@@ -8335,7 +8339,7 @@
     <service id=".service_locator.h8Jkkd2" alias="messenger.retry_strategy_locator"/>
     <service id=".service_locator.XDGmiR3" alias=".1_ServiceLocator~uwn_hYH"/>
     <service id=".service_locator.0GV1BZZ" alias=".service_locator.gSv9zYw"/>
-    <service id=".service_locator.ryKXXlF" alias=".service_locator.JdbTVH9"/>
+    <service id=".service_locator.eWwbL_j" alias=".service_locator.svjQA0z"/>
     <service id=".service_locator.wKF4yn1" alias=".service_locator.19_mNxd"/>
     <service id=".service_locator.Tyo7REE" alias=".service_locator.3L6edJW"/>
     <service id=".service_locator.nk0lT0X" alias=".service_locator.1kmbKC8"/>

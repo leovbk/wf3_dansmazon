@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -22,20 +23,20 @@ class User implements UserInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * 
+     * @Groups("user:read")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * 
+     * @Groups("user:read")
      * 
      */
     private $email;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * 
+     * @Groups("user:read")
      */
     private $username;
 
