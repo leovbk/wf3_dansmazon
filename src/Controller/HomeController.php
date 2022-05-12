@@ -4,23 +4,16 @@ namespace App\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HomeController extends AbstractController
 {
     /**
-     * @Route("/", name="app_home")
+     * @Route("/", name="app_home", methods={"GET"})
      */
-    public function index(): Response
-    {
-
-        $user = $this->get('security.token_storage')->getToken()->getUser();
-
-        dd($user);
-
-        
-        return $this->render('home/index.html.twig', [
-            'user' => $user
-        ]);
+    public function index(UserInterface $user = null) : Response
+    {   
+        return $this->json($user, 200, [],['groups' => 'user:read']);
     }
 }

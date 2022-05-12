@@ -10,7 +10,7 @@ security:
 
     providers:
         users_in_memory: { memory: null }
-        in_database:
+        app_user_provider:
             entity:
                 class: App\Entity\User
                 property: email
@@ -20,15 +20,15 @@ security:
             security: false
         main:
             lazy: true
-            provider: in_database
+            provider: app_user_provider
             form_login:
                 login_path: security_login
                 check_path: security_login
-                default_target_path: security_registration
+                default_target_path: /
 
             logout:
                 path: security_logout
-                target: security_registration
+                target: /
                 
 
             # activate different ways to authenticate
