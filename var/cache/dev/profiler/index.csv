@@ -113,3 +113,12 @@ b57a09,::1,GET,http://localhost:8000/,1652346709,,500
 462c8f,::1,GET,http://localhost:8000/,1652347791,,200
 e0c20d,::1,GET,http://localhost:8000/favicon.ico,1652347791,fee897,404
 fee897,::1,GET,http://localhost:8000/favicon.ico,1652347791,,404
+219e03,127.0.0.1,GET,http://127.0.0.1:8000/,1652359015,,200
+6e91aa,127.0.0.1,GET,http://127.0.0.1:8000/admin/product/create,1652359050,,200
+4b8324,127.0.0.1,GET,http://127.0.0.1:8000/admin/product/create,1652359069,1f0cd7,500
+1f0cd7,127.0.0.1,POST,http://127.0.0.1:8000/admin/product/create,1652359069,,500
+1e0406,127.0.0.1,GET,http://127.0.0.1:8000/admin/product/create,1652359136,,200
+37cec0,127.0.0.1,POST,http://127.0.0.1:8000/admin/product/create,1652359149,,302
+ce95f0,127.0.0.1,GET,http://127.0.0.1:8000/admin,1652359149,1168a9,500
+1168a9,127.0.0.1,GET,http://127.0.0.1:8000/admin,1652359149,,500
+1c1919,127.0.0.1,POST,http://127.0.0.1:8000/admin/product/create,1652359255,,302
