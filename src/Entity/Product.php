@@ -2,8 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\ProductRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ProductRepository;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -15,6 +18,7 @@ class Product
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups("product:read")
      */
     private $id;
 
@@ -23,6 +27,7 @@ class Product
      * @Assert\NotBlank(
      * message= "Veuillez saisir un titre"
      * )
+     * @Groups("product:read")
      */
     private $title;
 
@@ -31,6 +36,7 @@ class Product
      * @Assert\NotBlank(
      * message= "Veuillez saisir une description"
      * )
+     * @Groups("product:read")
      */
     private $content;
 
@@ -39,11 +45,13 @@ class Product
      * @Assert\NotBlank(
      * message= "Veuillez saisir un prix"
      * )
+     * @Groups("product:read")
      */
     private $price;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("product:read")
      */
     private $imageFileName;
 
@@ -52,6 +60,21 @@ class Product
      * @ORM\JoinColumn(nullable=false)
      */
     private $category;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="product")
+     */
+    private $comments;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $addDate;
+
+    public function __construct()
+    {
+        $this->comments = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -114,6 +137,48 @@ class Product
     public function setCategory(?Category $category): self
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Comment>
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comment $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): self
+    {
+        if ($this->comments->removeElement($comment)) {
+            // set the owning side to null (unless already changed)
+            if ($comment->getProduct() === $this) {
+                $comment->setProduct(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getAddDate(): ?\DateTimeInterface
+    {
+        return $this->addDate;
+    }
+
+    public function setAddDate(\DateTimeInterface $addDate): self
+    {
+        $this->addDate = $addDate;
 
         return $this;
     }

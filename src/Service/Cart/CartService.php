@@ -16,7 +16,7 @@ class CartService {
         $this->productRepo = $productRepo;
     }
 
-    public function add(int $id,) {
+    public function add(int $id) {
         //$session = $this->session->getSession();
         
         $panier = $this->session->get('panier', []);

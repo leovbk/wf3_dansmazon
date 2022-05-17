@@ -69,8 +69,9 @@ class __TwigTemplate_e2ebbcf85f399fc37e93b86aae35d13d6477ce6416a36106654ff720b8c
     ";
         // line 22
         $this->displayBlock('body', $context, $blocks);
-        // line 23
-        echo "  </body>
+        // line 25
+        echo "    </body>
+
 </html>
 ";
         
@@ -151,7 +152,9 @@ class __TwigTemplate_e2ebbcf85f399fc37e93b86aae35d13d6477ce6416a36106654ff720b8c
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
 
-        echo " ";
+        // line 23
+        echo "
+        ";
         
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
@@ -167,7 +170,7 @@ class __TwigTemplate_e2ebbcf85f399fc37e93b86aae35d13d6477ce6416a36106654ff720b8c
 
     public function getDebugInfo()
     {
-        return array (  145 => 22,  135 => 19,  115 => 15,  104 => 11,  85 => 5,  73 => 23,  71 => 22,  67 => 20,  64 => 15,  61 => 11,  53 => 5,  47 => 1,);
+        return array (  156 => 23,  146 => 22,  136 => 19,  116 => 15,  105 => 11,  86 => 5,  73 => 25,  71 => 22,  67 => 20,  64 => 15,  61 => 11,  53 => 5,  47 => 1,);
     }
 
     public function getSourceContext()
@@ -193,8 +196,11 @@ class __TwigTemplate_e2ebbcf85f399fc37e93b86aae35d13d6477ce6416a36106654ff720b8c
     #} {% endblock %}
   </head>
   <body>
-    {% block body %} {% endblock %}
-  </body>
+    {% block body %}
+
+        {% endblock %}
+    </body>
+
 </html>
 ", "base.html.twig", "/Users/macdeleo/Desktop/dansmazone/dansmazone/templates/base.html.twig");
     }
