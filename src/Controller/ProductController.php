@@ -19,6 +19,7 @@ class ProductController extends AbstractController
      */
     public function index(ProductRepository $productRepo): Response
     {
+        header("Access-Control-Allow-Origin: *");
 
         $products = $productRepo->findAll();
         
@@ -67,6 +68,8 @@ class ProductController extends AbstractController
      */
     public function showNewProducts(ProductRepository $productRepo): Response
     {
+
+        header("Access-Control-Allow-Origin: *");
 
         $nouveautes = $productRepo->findNewProduct();
         

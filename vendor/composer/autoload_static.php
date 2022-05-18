@@ -126,6 +126,10 @@ class ComposerStaticInit570cbb305af7b98c3d02bd9b41acdcc4
             'PhpParser\\' => 10,
             'PHPStan\\PhpDocParser\\' => 21,
         ),
+        'N' => 
+        array (
+            'Nelmio\\CorsBundle\\' => 18,
+        ),
         'M' => 
         array (
             'Monolog\\' => 8,
@@ -505,6 +509,10 @@ class ComposerStaticInit570cbb305af7b98c3d02bd9b41acdcc4
         array (
             0 => __DIR__ . '/..' . '/phpstan/phpdoc-parser/src',
         ),
+        'Nelmio\\CorsBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/nelmio/cors-bundle',
+        ),
         'Monolog\\' => 
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
@@ -602,15 +610,23 @@ class ComposerStaticInit570cbb305af7b98c3d02bd9b41acdcc4
 
     public static $classMap = array (
         'App\\Controller\\AdminController' => __DIR__ . '/../..' . '/src/Controller/AdminController.php',
+        'App\\Controller\\CartController' => __DIR__ . '/../..' . '/src/Controller/CartController.php',
         'App\\Controller\\HomeController' => __DIR__ . '/../..' . '/src/Controller/HomeController.php',
+        'App\\Controller\\ProductController' => __DIR__ . '/../..' . '/src/Controller/ProductController.php',
         'App\\Controller\\SecurityController' => __DIR__ . '/../..' . '/src/Controller/SecurityController.php',
+        'App\\Entity\\Category' => __DIR__ . '/../..' . '/src/Entity/Category.php',
+        'App\\Entity\\Comment' => __DIR__ . '/../..' . '/src/Entity/Comment.php',
         'App\\Entity\\Product' => __DIR__ . '/../..' . '/src/Entity/Product.php',
         'App\\Entity\\User' => __DIR__ . '/../..' . '/src/Entity/User.php',
+        'App\\Form\\CommentType' => __DIR__ . '/../..' . '/src/Form/CommentType.php',
         'App\\Form\\ProductType' => __DIR__ . '/../..' . '/src/Form/ProductType.php',
         'App\\Form\\RegistrationType' => __DIR__ . '/../..' . '/src/Form/RegistrationType.php',
         'App\\Kernel' => __DIR__ . '/../..' . '/src/Kernel.php',
+        'App\\Repository\\CategoryRepository' => __DIR__ . '/../..' . '/src/Repository/CategoryRepository.php',
+        'App\\Repository\\CommentRepository' => __DIR__ . '/../..' . '/src/Repository/CommentRepository.php',
         'App\\Repository\\ProductRepository' => __DIR__ . '/../..' . '/src/Repository/ProductRepository.php',
         'App\\Repository\\UserRepository' => __DIR__ . '/../..' . '/src/Repository/UserRepository.php',
+        'App\\Service\\Cart\\CartService' => __DIR__ . '/../..' . '/src/Service/Cart/CartService.php',
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
         'Collator' => __DIR__ . '/..' . '/symfony/intl/Resources/stubs/Collator.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
@@ -2066,6 +2082,16 @@ class ComposerStaticInit570cbb305af7b98c3d02bd9b41acdcc4
         'Monolog\\SignalHandler' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/SignalHandler.php',
         'Monolog\\Test\\TestCase' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Test/TestCase.php',
         'Monolog\\Utils' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Utils.php',
+        'Nelmio\\CorsBundle\\DependencyInjection\\Compiler\\CorsConfigurationProviderPass' => __DIR__ . '/..' . '/nelmio/cors-bundle/DependencyInjection/Compiler/CorsConfigurationProviderPass.php',
+        'Nelmio\\CorsBundle\\DependencyInjection\\Configuration' => __DIR__ . '/..' . '/nelmio/cors-bundle/DependencyInjection/Configuration.php',
+        'Nelmio\\CorsBundle\\DependencyInjection\\NelmioCorsExtension' => __DIR__ . '/..' . '/nelmio/cors-bundle/DependencyInjection/NelmioCorsExtension.php',
+        'Nelmio\\CorsBundle\\EventListener\\CacheableResponseVaryListener' => __DIR__ . '/..' . '/nelmio/cors-bundle/EventListener/CacheableResponseVaryListener.php',
+        'Nelmio\\CorsBundle\\EventListener\\CorsListener' => __DIR__ . '/..' . '/nelmio/cors-bundle/EventListener/CorsListener.php',
+        'Nelmio\\CorsBundle\\NelmioCorsBundle' => __DIR__ . '/..' . '/nelmio/cors-bundle/NelmioCorsBundle.php',
+        'Nelmio\\CorsBundle\\Options\\ConfigProvider' => __DIR__ . '/..' . '/nelmio/cors-bundle/Options/ConfigProvider.php',
+        'Nelmio\\CorsBundle\\Options\\ProviderInterface' => __DIR__ . '/..' . '/nelmio/cors-bundle/Options/ProviderInterface.php',
+        'Nelmio\\CorsBundle\\Options\\Resolver' => __DIR__ . '/..' . '/nelmio/cors-bundle/Options/Resolver.php',
+        'Nelmio\\CorsBundle\\Options\\ResolverInterface' => __DIR__ . '/..' . '/nelmio/cors-bundle/Options/ResolverInterface.php',
         'Normalizer' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/Resources/stubs/Normalizer.php',
         'NumberFormatter' => __DIR__ . '/..' . '/symfony/intl/Resources/stubs/NumberFormatter.php',
         'PHPStan\\PhpDocParser\\Ast\\ConstExpr\\ConstExprArrayItemNode' => __DIR__ . '/..' . '/phpstan/phpdoc-parser/src/Ast/ConstExpr/ConstExprArrayItemNode.php',

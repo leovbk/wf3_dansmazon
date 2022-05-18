@@ -18,29 +18,45 @@ class SecurityController extends AbstractController
      */
 
     public function registration(Request $request, EntityManagerInterface $em, UserPasswordEncoderInterface $encoder ){
-
+        
+        $formData = json_decode($request->getContent(), true);
+        
         $user = new User();
 
         $form = $this->createForm(RegistrationType::class, $user);
 
         $form->handleRequest($request);
 
+        $form->submit($formData);
+
         if($form->isSubmitted() && $form->isValid()){
 
-            $hash = $encoder->encodePassword($user, $user->getPassword());
+            $user->setEmail($formData['email']);
+            $user->setUsername($formData['username']);
+            $user->setAddress($formData['address']);
+            $user->setPostalcode($formData['postalcode']);
+            $user->setCity($formData['city']);
+            $user->setUserfirstname($formData['userfirstname']);
+
+            $hash = $encoder->encodePassword($user, $formData["password"]);
 
             $user->setPassword($hash);
             
             $em->persist($user);
 
             $em->flush();
+            
+            return $this->json(true, 200);
 
-            return $this->redirectToRoute('security_login');
+        } else {
+
+            $error = $form->getErrors(true, false);
+
+            return $this->json($error);
+
         }
 
-        return $this->render('security/registration.html.twig', [
-            'form' => $form->createView()
-            ]);
+            
     }
 
     /**

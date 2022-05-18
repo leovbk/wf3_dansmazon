@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -30,6 +32,12 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups("user:read")
+     * @Assert\NotBlank(
+     *  message="Veuillez renseigner une adresse e-mail"
+     * )
+     * @Assert\Email(
+     *  message="Veuillez saisir une adresse email valide"
+     * )
      * 
      */
     private $email;
@@ -37,6 +45,9 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups("user:read")
+     * @Assert\NotBlank(
+     *  message="Veuillez renseigner un nom"
+     *  )
      */
     private $username;
 
@@ -51,6 +62,48 @@ class User implements UserInterface
      */
 
     public $confirm_password;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="user")
+     */
+    private $comments;
+
+    /**
+     * @ORM\Column(type="text")
+     * @Assert\NotBlank(
+     *  message="Veuillez renseigner une adresse postale"
+     * )
+     */
+    private $address;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(
+     *  message="Veuillez renseigner un code postal"
+     * )
+     */
+    private $postalcode;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(
+     *  message="Veuillez renseigner une ville"
+     * )
+     */
+    private $city;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(
+     *  message="Veuillez renseigner ce champ"
+     *  )
+     */
+    private $userfirstname;
+
+    public function __construct()
+    {
+        $this->comments = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -99,5 +152,83 @@ class User implements UserInterface
 
     public function getRoles(){
         return ['ROLE_USER'];
+    }
+
+    /**
+     * @return Collection<int, Comment>
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comment $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): self
+    {
+        if ($this->comments->removeElement($comment)) {
+            // set the owning side to null (unless already changed)
+            if ($comment->getUser() === $this) {
+                $comment->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getAddress(): ?string
+    {
+        return $this->address;
+    }
+
+    public function setAddress(string $address): self
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    public function getPostalcode(): ?string
+    {
+        return $this->postalcode;
+    }
+
+    public function setPostalcode(string $postalcode): self
+    {
+        $this->postalcode = $postalcode;
+
+        return $this;
+    }
+
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    public function setCity(string $city): self
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    public function getUserfirstname(): ?string
+    {
+        return $this->userfirstname;
+    }
+
+    public function setUserfirstname(string $userfirstname): self
+    {
+        $this->userfirstname = $userfirstname;
+
+        return $this;
     }
 }
