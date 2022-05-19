@@ -248,18 +248,11 @@
         </parameter>
       </parameter>
     </parameter>
-    <parameter key="nelmio_cors.map" type="collection">
-      <parameter key="^/" type="collection"/>
-    </parameter>
+    <parameter key="nelmio_cors.map" type="collection"/>
     <parameter key="nelmio_cors.defaults" type="collection">
-      <parameter key="allow_origin" type="collection">
-        <parameter>%env(CORS_ALLOW_ORIGIN)%</parameter>
-      </parameter>
+      <parameter key="allow_origin">true</parameter>
       <parameter key="allow_credentials">false</parameter>
-      <parameter key="allow_headers" type="collection">
-        <parameter>content-type</parameter>
-        <parameter>authorization</parameter>
-      </parameter>
+      <parameter key="allow_headers">true</parameter>
       <parameter key="expose_headers" type="collection">
         <parameter>Link</parameter>
       </parameter>
@@ -5444,7 +5437,7 @@
       <argument type="service" id="security.token_storage" on-invalid="null"/>
       <call method="registerListener">
         <argument>main</argument>
-        <argument>security_logout</argument>
+        <argument>app_logout</argument>
         <argument>logout</argument>
         <argument>_csrf_token</argument>
         <argument>null</argument>
@@ -6033,7 +6026,7 @@
       <argument type="collection">
         <argument key="csrf_parameter">_csrf_token</argument>
         <argument key="csrf_token_id">logout</argument>
-        <argument key="logout_path">security_logout</argument>
+        <argument key="logout_path">app_logout</argument>
       </argument>
     </service>
     <service id="security.logout.listener.default.main" class="Symfony\Component\Security\Http\EventListener\DefaultLogoutListener">
@@ -6492,7 +6485,7 @@
     </service>
     <service id="nelmio_cors.options_provider.config" class="Nelmio\CorsBundle\Options\ConfigProvider">
       <tag name="nelmio_cors.options_provider" priority="-1"/>
-      <argument>%nelmio_cors.map%</argument>
+      <argument type="collection"/>
       <argument>%nelmio_cors.defaults%</argument>
     </service>
     <service id="nelmio_cors.cacheable_response_vary_listener" class="Nelmio\CorsBundle\EventListener\CacheableResponseVaryListener">
@@ -6907,7 +6900,14 @@
         <argument key="encoder" type="service_closure" id="security.user_password_encoder.generic"/>
       </argument>
     </service>
-    <service id=".service_locator.1vAcD9d" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.XEotb6I" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="check" type="service_closure" id="security.user_password_encoder.generic"/>
+        <argument key="userRepository" type="service_closure" id="App\Repository\UserRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.P0DwNqk" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\AdminController::adminProductCreate" type="service_closure" id=".service_locator.QhOf4G0"/>
@@ -6920,6 +6920,7 @@
         <argument key="App\Controller\ProductController::index" type="service_closure" id=".service_locator.y2D9fmo"/>
         <argument key="App\Controller\ProductController::show" type="service_closure" id=".service_locator.cMgpYgF"/>
         <argument key="App\Controller\ProductController::showNewProducts" type="service_closure" id=".service_locator.y2D9fmo"/>
+        <argument key="App\Controller\SecurityController::login" type="service_closure" id=".service_locator.XEotb6I"/>
         <argument key="App\Controller\SecurityController::registration" type="service_closure" id=".service_locator..tt6s91"/>
         <argument key="App\Kernel::loadRoutes" type="service_closure" id=".service_locator.KfbR3DY"/>
         <argument key="App\Kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.KfbR3DY"/>
@@ -6937,6 +6938,7 @@
         <argument key="App\Controller\ProductController:index" type="service_closure" id=".service_locator.y2D9fmo"/>
         <argument key="App\Controller\ProductController:show" type="service_closure" id=".service_locator.cMgpYgF"/>
         <argument key="App\Controller\ProductController:showNewProducts" type="service_closure" id=".service_locator.y2D9fmo"/>
+        <argument key="App\Controller\SecurityController:login" type="service_closure" id=".service_locator.XEotb6I"/>
         <argument key="App\Controller\SecurityController:registration" type="service_closure" id=".service_locator..tt6s91"/>
         <argument key="kernel:loadRoutes" type="service_closure" id=".service_locator.KfbR3DY"/>
         <argument key="kernel:registerContainerConfiguration" type="service_closure" id=".service_locator.KfbR3DY"/>
@@ -7565,12 +7567,12 @@
       <argument type="service" id="security.token_storage"/>
     </service>
     <service id="debug.argument_resolver.service.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
-      <argument type="service" id=".service_locator.1vAcD9d"/>
+      <argument type="service" id=".service_locator.P0DwNqk"/>
     </service>
     <service id="debug.argument_resolver.default.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver"/>
     <service id="debug.argument_resolver.variadic.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver"/>
     <service id="debug.argument_resolver.not_tagged_controller.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
-      <argument type="service" id=".service_locator.1vAcD9d"/>
+      <argument type="service" id=".service_locator.P0DwNqk"/>
     </service>
     <service id="debug.traced.messenger.bus.default.inner" class="Symfony\Component\Messenger\MessageBus">
       <argument type="iterator">
@@ -8547,7 +8549,7 @@
     <service id="sensio_framework_extra.security.expression_language" alias="sensio_framework_extra.security.expression_language.default"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.gSv9zYw" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.1vAcD9d"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.P0DwNqk"/>
     <service id="session" alias=".session.do-not-use" public="true">
       <deprecated package="symfony/framework-bundle" version="5.3">The "%alias_id%" service and "SessionInterface" alias are deprecated, use "$requestStack-&gt;getSession()" instead.</deprecated>
     </service>
@@ -8574,7 +8576,8 @@
     <service id=".service_locator.0GV1BZZ" alias=".service_locator.gSv9zYw"/>
     <service id=".service_locator.hGfwRMI" alias=".service_locator.eiWWj8O"/>
     <service id=".service_locator.nJLgal9" alias=".service_locator.cMgpYgF"/>
-    <service id=".service_locator.NgYmtGA" alias=".service_locator.1vAcD9d"/>
+    <service id=".service_locator.jQRWnv4" alias=".service_locator.XEotb6I"/>
+    <service id=".service_locator.SFpbOrd" alias=".service_locator.P0DwNqk"/>
     <service id=".service_locator.wKF4yn1" alias=".service_locator.19_mNxd"/>
     <service id=".service_locator.Ipm6G2C" alias=".service_locator.Ca5dgaM"/>
     <service id=".service_locator.nk0lT0X" alias=".service_locator.1kmbKC8"/>
@@ -8610,6 +8613,7 @@
     <service id=".service_locator.XS4jt.k" alias=".service_locator.sbvMfph"/>
     <service id=".service_locator.CZNxtqm" alias=".service_locator.y2D9fmo"/>
     <service id=".service_locator.9yqzbdx" alias=".service_locator..tt6s91"/>
+    <service id=".service_locator.HfJksHH" alias=".service_locator.XEotb6I"/>
     <service id=".service_locator.Wd_D6Iy" alias=".service_locator.GNc8e5B"/>
     <service id=".service_locator.L0rFhJm" alias=".service_locator.GVyCdgr"/>
     <service id=".service_locator.9YCWxeJ" alias=".service_locator.dw8O4oN"/>
