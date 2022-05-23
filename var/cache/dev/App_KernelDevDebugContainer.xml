@@ -6855,9 +6855,10 @@
         <argument key="productRepository" type="service_closure" id="App\Repository\ProductRepository"/>
       </argument>
     </service>
-    <service id=".service_locator.QhOf4G0" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.UtnQrHU" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
+        <argument key="categoryRep" type="service_closure" id="App\Repository\CategoryRepository"/>
         <argument key="manager" type="service_closure" id="doctrine.orm.default_entity_manager"/>
         <argument key="slugger" type="service_closure" id="slugger"/>
       </argument>
@@ -6907,10 +6908,10 @@
         <argument key="userRepository" type="service_closure" id="App\Repository\UserRepository"/>
       </argument>
     </service>
-    <service id=".service_locator.P0DwNqk" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.oMWEWnk" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
-        <argument key="App\Controller\AdminController::adminProductCreate" type="service_closure" id=".service_locator.QhOf4G0"/>
+        <argument key="App\Controller\AdminController::adminProductCreate" type="service_closure" id=".service_locator.UtnQrHU"/>
         <argument key="App\Controller\AdminController::adminProductDelete" type="service_closure" id=".service_locator.cMgpYgF"/>
         <argument key="App\Controller\AdminController::adminProductEdit" type="service_closure" id=".service_locator.eiWWj8O"/>
         <argument key="App\Controller\AdminController::index" type="service_closure" id=".service_locator.JeTwYn4"/>
@@ -6928,7 +6929,7 @@
         <argument key="kernel::loadRoutes" type="service_closure" id=".service_locator.KfbR3DY"/>
         <argument key="kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.KfbR3DY"/>
         <argument key="kernel::terminate" type="service_closure" id=".service_locator.KfwZsne"/>
-        <argument key="App\Controller\AdminController:adminProductCreate" type="service_closure" id=".service_locator.QhOf4G0"/>
+        <argument key="App\Controller\AdminController:adminProductCreate" type="service_closure" id=".service_locator.UtnQrHU"/>
         <argument key="App\Controller\AdminController:adminProductDelete" type="service_closure" id=".service_locator.cMgpYgF"/>
         <argument key="App\Controller\AdminController:adminProductEdit" type="service_closure" id=".service_locator.eiWWj8O"/>
         <argument key="App\Controller\AdminController:index" type="service_closure" id=".service_locator.JeTwYn4"/>
@@ -7567,12 +7568,12 @@
       <argument type="service" id="security.token_storage"/>
     </service>
     <service id="debug.argument_resolver.service.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
-      <argument type="service" id=".service_locator.P0DwNqk"/>
+      <argument type="service" id=".service_locator.oMWEWnk"/>
     </service>
     <service id="debug.argument_resolver.default.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver"/>
     <service id="debug.argument_resolver.variadic.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver"/>
     <service id="debug.argument_resolver.not_tagged_controller.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
-      <argument type="service" id=".service_locator.P0DwNqk"/>
+      <argument type="service" id=".service_locator.oMWEWnk"/>
     </service>
     <service id="debug.traced.messenger.bus.default.inner" class="Symfony\Component\Messenger\MessageBus">
       <argument type="iterator">
@@ -8549,7 +8550,7 @@
     <service id="sensio_framework_extra.security.expression_language" alias="sensio_framework_extra.security.expression_language.default"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.gSv9zYw" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.P0DwNqk"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.oMWEWnk"/>
     <service id="session" alias=".session.do-not-use" public="true">
       <deprecated package="symfony/framework-bundle" version="5.3">The "%alias_id%" service and "SessionInterface" alias are deprecated, use "$requestStack-&gt;getSession()" instead.</deprecated>
     </service>
@@ -8577,7 +8578,7 @@
     <service id=".service_locator.hGfwRMI" alias=".service_locator.eiWWj8O"/>
     <service id=".service_locator.nJLgal9" alias=".service_locator.cMgpYgF"/>
     <service id=".service_locator.jQRWnv4" alias=".service_locator.XEotb6I"/>
-    <service id=".service_locator.SFpbOrd" alias=".service_locator.P0DwNqk"/>
+    <service id=".service_locator.1Elmgug" alias=".service_locator.oMWEWnk"/>
     <service id=".service_locator.wKF4yn1" alias=".service_locator.19_mNxd"/>
     <service id=".service_locator.Ipm6G2C" alias=".service_locator.Ca5dgaM"/>
     <service id=".service_locator.nk0lT0X" alias=".service_locator.1kmbKC8"/>
@@ -8607,7 +8608,7 @@
     <service id=".service_locator._5g_Wvc" alias=".service_locator.KfwZsne"/>
     <service id=".service_locator.JBAFp66" alias=".service_locator.KfbR3DY"/>
     <service id=".service_locator.0.yQVTX" alias=".service_locator.JeTwYn4"/>
-    <service id=".service_locator.6LyzgZI" alias=".service_locator.QhOf4G0"/>
+    <service id=".service_locator.3LscZ3t" alias=".service_locator.UtnQrHU"/>
     <service id=".service_locator.F8wKc9b" alias=".service_locator.eiWWj8O"/>
     <service id=".service_locator.FLvg0uj" alias=".service_locator.cMgpYgF"/>
     <service id=".service_locator.XS4jt.k" alias=".service_locator.sbvMfph"/>

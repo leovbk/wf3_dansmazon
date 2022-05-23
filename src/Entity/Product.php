@@ -58,6 +58,7 @@ class Product
     /**
      * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="articles")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups("product:read")
      */
     private $category;
 
@@ -68,6 +69,7 @@ class Product
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups("product:read")
      */
     private $addDate;
 
