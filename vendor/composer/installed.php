@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '99afa3e4d8627b72f98a819e55924db6c024a165',
+        'reference' => 'e67d5847720ac7645c7cedaa26ce886c9cae191b',
         'name' => '__root__',
         'dev' => true,
     ),
@@ -16,7 +16,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '99afa3e4d8627b72f98a819e55924db6c024a165',
+            'reference' => 'e67d5847720ac7645c7cedaa26ce886c9cae191b',
             'dev_requirement' => false,
         ),
         'doctrine/annotations' => array(
@@ -594,6 +594,15 @@
             'install_path' => __DIR__ . '/../symfony/framework-bundle',
             'aliases' => array(),
             'reference' => 'e2423e443bd6e6d5371d5c72d5d1a98c8d9fbb45',
+            'dev_requirement' => false,
+        ),
+        'symfony/google-mailer' => array(
+            'pretty_version' => 'v5.4.8',
+            'version' => '5.4.8.0',
+            'type' => 'symfony-mailer-bridge',
+            'install_path' => __DIR__ . '/../symfony/google-mailer',
+            'aliases' => array(),
+            'reference' => '8da892489a7536e869c56efa06bf2f74f15a4693',
             'dev_requirement' => false,
         ),
         'symfony/http-client' => array(

@@ -11,6 +11,7 @@ return [
     'cart_add' => [['id'], ['_controller' => 'App\\Controller\\CartController::add'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/cart/add']], [], [], []],
     'cart_remove' => [['id'], ['_controller' => 'App\\Controller\\CartController::remove'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/cart/remove']], [], [], []],
     'app_home' => [[], ['_controller' => 'App\\Controller\\HomeController::index'], [], [['text', '/']], [], [], []],
+    'app_mailer' => [[], ['_controller' => 'App\\Controller\\MailerController::sendEmail'], [], [['text', '/email']], [], [], []],
     'app_product' => [[], ['_controller' => 'App\\Controller\\ProductController::index'], [], [['text', '/products']], [], [], []],
     'app_show' => [['id'], ['_controller' => 'App\\Controller\\ProductController::show'], ['id' => '\\d+'], [['variable', '/', '\\d+', 'id', true], ['text', '/product']], [], [], []],
     'app_nouveautes' => [[], ['_controller' => 'App\\Controller\\ProductController::showNewProducts'], [], [['text', '/nouveautes']], [], [], []],

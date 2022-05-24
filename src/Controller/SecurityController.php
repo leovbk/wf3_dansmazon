@@ -23,7 +23,7 @@ class SecurityController extends AbstractController
 
     public function registration(Request $request, EntityManagerInterface $em, UserPasswordEncoderInterface $encoder ){
         
-        // $formData = json_decode($request->getContent(), true);
+        $formData = json_decode($request->getContent(), true);
         
         $user = new User();
 
