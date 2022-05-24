@@ -392,6 +392,13 @@
         <argument type="service" id=".service_locator.GNc8e5B.App\Controller\HomeController"/>
       </call>
     </service>
+    <service id="App\Controller\MailerController" class="App\Controller\MailerController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="container.service_subscriber"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.GNc8e5B.App\Controller\MailerController"/>
+      </call>
+    </service>
     <service id="App\Controller\ProductController" class="App\Controller\ProductController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
@@ -1619,6 +1626,12 @@
     </service>
     <service id="mailer.transport_factory.abstract" class="Symfony\Component\Mailer\Transport\AbstractTransportFactory" abstract="true">
       <tag name="monolog.logger" channel="mailer"/>
+      <argument type="service" id="debug.event_dispatcher"/>
+      <argument type="service" id=".debug.http_client" on-invalid="ignore"/>
+      <argument type="service" id="monolog.logger.mailer" on-invalid="ignore"/>
+    </service>
+    <service id="mailer.transport_factory.gmail" class="Symfony\Component\Mailer\Bridge\Google\Transport\GmailTransportFactory">
+      <tag name="mailer.transport_factory"/>
       <argument type="service" id="debug.event_dispatcher"/>
       <argument type="service" id=".debug.http_client" on-invalid="ignore"/>
       <argument type="service" id="monolog.logger.mailer" on-invalid="ignore"/>
@@ -6501,6 +6514,9 @@
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\HomeController" class="App\Controller\HomeController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\HomeController" class="App\Controller\HomeController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\HomeController" class="App\Controller\HomeController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\MailerController" class="App\Controller\MailerController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\MailerController" class="App\Controller\MailerController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\MailerController" class="App\Controller\MailerController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\ProductController" class="App\Controller\ProductController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\ProductController" class="App\Controller\ProductController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\ProductController" class="App\Controller\ProductController" autowire="true" autoconfigure="true" abstract="true"/>
@@ -6888,6 +6904,12 @@
       <tag name="container.service_locator"/>
       <argument type="collection"/>
     </service>
+    <service id=".service_locator.CpaXrFh" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="mailer" type="service_closure" id="mailer.mailer"/>
+      </argument>
+    </service>
     <service id=".service_locator.y2D9fmo" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -6908,7 +6930,7 @@
         <argument key="userRepository" type="service_closure" id="App\Repository\UserRepository"/>
       </argument>
     </service>
-    <service id=".service_locator.oMWEWnk" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.pmj78VC" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\AdminController::adminProductCreate" type="service_closure" id=".service_locator.UtnQrHU"/>
@@ -6918,6 +6940,7 @@
         <argument key="App\Controller\CartController::add" type="service_closure" id=".service_locator.sbvMfph"/>
         <argument key="App\Controller\CartController::index" type="service_closure" id=".service_locator.sbvMfph"/>
         <argument key="App\Controller\CartController::remove" type="service_closure" id=".service_locator.sbvMfph"/>
+        <argument key="App\Controller\MailerController::sendEmail" type="service_closure" id=".service_locator.CpaXrFh"/>
         <argument key="App\Controller\ProductController::index" type="service_closure" id=".service_locator.y2D9fmo"/>
         <argument key="App\Controller\ProductController::show" type="service_closure" id=".service_locator.cMgpYgF"/>
         <argument key="App\Controller\ProductController::showNewProducts" type="service_closure" id=".service_locator.y2D9fmo"/>
@@ -6936,6 +6959,7 @@
         <argument key="App\Controller\CartController:add" type="service_closure" id=".service_locator.sbvMfph"/>
         <argument key="App\Controller\CartController:index" type="service_closure" id=".service_locator.sbvMfph"/>
         <argument key="App\Controller\CartController:remove" type="service_closure" id=".service_locator.sbvMfph"/>
+        <argument key="App\Controller\MailerController:sendEmail" type="service_closure" id=".service_locator.CpaXrFh"/>
         <argument key="App\Controller\ProductController:index" type="service_closure" id=".service_locator.y2D9fmo"/>
         <argument key="App\Controller\ProductController:show" type="service_closure" id=".service_locator.cMgpYgF"/>
         <argument key="App\Controller\ProductController:showNewProducts" type="service_closure" id=".service_locator.y2D9fmo"/>
@@ -7382,6 +7406,12 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.GNc8e5B" method="withContext"/>
     </service>
+    <service id=".service_locator.GNc8e5B.App\Controller\MailerController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\MailerController"/>
+      <argument>App\Controller\MailerController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.GNc8e5B" method="withContext"/>
+    </service>
     <service id=".service_locator.GNc8e5B.App\Controller\ProductController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\ProductController"/>
       <argument>App\Controller\ProductController</argument>
@@ -7568,12 +7598,12 @@
       <argument type="service" id="security.token_storage"/>
     </service>
     <service id="debug.argument_resolver.service.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
-      <argument type="service" id=".service_locator.oMWEWnk"/>
+      <argument type="service" id=".service_locator.pmj78VC"/>
     </service>
     <service id="debug.argument_resolver.default.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver"/>
     <service id="debug.argument_resolver.variadic.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver"/>
     <service id="debug.argument_resolver.not_tagged_controller.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
-      <argument type="service" id=".service_locator.oMWEWnk"/>
+      <argument type="service" id=".service_locator.pmj78VC"/>
     </service>
     <service id="debug.traced.messenger.bus.default.inner" class="Symfony\Component\Messenger\MessageBus">
       <argument type="iterator">
@@ -8550,7 +8580,7 @@
     <service id="sensio_framework_extra.security.expression_language" alias="sensio_framework_extra.security.expression_language.default"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.gSv9zYw" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.oMWEWnk"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.pmj78VC"/>
     <service id="session" alias=".session.do-not-use" public="true">
       <deprecated package="symfony/framework-bundle" version="5.3">The "%alias_id%" service and "SessionInterface" alias are deprecated, use "$requestStack-&gt;getSession()" instead.</deprecated>
     </service>
@@ -8578,7 +8608,7 @@
     <service id=".service_locator.hGfwRMI" alias=".service_locator.eiWWj8O"/>
     <service id=".service_locator.nJLgal9" alias=".service_locator.cMgpYgF"/>
     <service id=".service_locator.jQRWnv4" alias=".service_locator.XEotb6I"/>
-    <service id=".service_locator.1Elmgug" alias=".service_locator.oMWEWnk"/>
+    <service id=".service_locator.ND8ELU7" alias=".service_locator.pmj78VC"/>
     <service id=".service_locator.wKF4yn1" alias=".service_locator.19_mNxd"/>
     <service id=".service_locator.Ipm6G2C" alias=".service_locator.Ca5dgaM"/>
     <service id=".service_locator.nk0lT0X" alias=".service_locator.1kmbKC8"/>
@@ -8612,6 +8642,7 @@
     <service id=".service_locator.F8wKc9b" alias=".service_locator.eiWWj8O"/>
     <service id=".service_locator.FLvg0uj" alias=".service_locator.cMgpYgF"/>
     <service id=".service_locator.XS4jt.k" alias=".service_locator.sbvMfph"/>
+    <service id=".service_locator.yciRRzv" alias=".service_locator.CpaXrFh"/>
     <service id=".service_locator.CZNxtqm" alias=".service_locator.y2D9fmo"/>
     <service id=".service_locator.9yqzbdx" alias=".service_locator..tt6s91"/>
     <service id=".service_locator.HfJksHH" alias=".service_locator.XEotb6I"/>
