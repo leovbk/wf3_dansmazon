@@ -19,6 +19,7 @@ class Product
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      * @Groups("product:read")
+     * @Groups("cart:read")
      */
     private $id;
 
@@ -28,6 +29,7 @@ class Product
      * message= "Veuillez saisir un titre"
      * )
      * @Groups("product:read")
+     * @Groups("cart:read")
      */
     private $title;
 
@@ -37,6 +39,7 @@ class Product
      * message= "Veuillez saisir une description"
      * )
      * @Groups("product:read")
+     * @Groups("cart:read")
      */
     private $content;
 
@@ -46,12 +49,14 @@ class Product
      * message= "Veuillez saisir un prix"
      * )
      * @Groups("product:read")
+     * @Groups("cart:read")
      */
     private $price;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups("product:read")
+     * @Groups("cart:read")
      */
     private $imageFileName;
 
@@ -59,6 +64,7 @@ class Product
      * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="articles")
      * @ORM\JoinColumn(nullable=false)
      * @Groups("product:read")
+     * 
      */
     private $category;
 

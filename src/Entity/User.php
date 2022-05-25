@@ -54,17 +54,20 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\Length(min="6", minMessage="Votre mot de passe doit faire minimum 6 caractères")
+     * @Groups("user:read")
      */
     private $password;
 
     /**
      * @Assert\EqualTo(propertyPath="password", message="Votre mot de passe ne correspond pas")
+     * @Groups("user:read")
      */
 
     public $confirm_password;
 
     /**
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="user")
+     * 
      */
     private $comments;
 
@@ -73,6 +76,7 @@ class User implements UserInterface
      * @Assert\NotBlank(
      *  message="Veuillez renseigner une adresse postale"
      * )
+     * @Groups("user:read")
      */
     private $address;
 
@@ -81,6 +85,7 @@ class User implements UserInterface
      * @Assert\NotBlank(
      *  message="Veuillez renseigner un code postal"
      * )
+     * @Groups("user:read")
      */
     private $postalcode;
 
@@ -89,6 +94,7 @@ class User implements UserInterface
      * @Assert\NotBlank(
      *  message="Veuillez renseigner une ville"
      * )
+     * @Groups("user:read")
      */
     private $city;
 
@@ -97,12 +103,20 @@ class User implements UserInterface
      * @Assert\NotBlank(
      *  message="Veuillez renseigner ce champ"
      *  )
+     * @Groups("user:read")
      */
     private $userfirstname;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Cart::class, mappedBy="user")
+     * 
+     */
+    private $carts;
 
     public function __construct()
     {
         $this->comments = new ArrayCollection();
+        $this->carts = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -228,6 +242,36 @@ class User implements UserInterface
     public function setUserfirstname(string $userfirstname): self
     {
         $this->userfirstname = $userfirstname;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Cart>
+     */
+    public function getCarts(): Collection
+    {
+        return $this->carts;
+    }
+
+    public function addCart(Cart $cart): self
+    {
+        if (!$this->carts->contains($cart)) {
+            $this->carts[] = $cart;
+            $cart->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCart(Cart $cart): self
+    {
+        if ($this->carts->removeElement($cart)) {
+            // set the owning side to null (unless already changed)
+            if ($cart->getUser() === $this) {
+                $cart->setUser(null);
+            }
+        }
 
         return $this;
     }
