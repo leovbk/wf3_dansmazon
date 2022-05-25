@@ -1,0 +1,3 @@
+<?php //Symfony%255CComponent%255CHttpFoundation%255CRequest%2523getRequestUri
+
+return [PHP_INT_MAX, []];
