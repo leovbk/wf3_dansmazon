@@ -103,7 +103,7 @@ class SecurityController extends AbstractController
         
 
 
-        return $this->json($session);
+        return $this->json($session,200, [],['groups' => 'user:read']);
     }
 
     /**
