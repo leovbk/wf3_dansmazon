@@ -162,3 +162,8 @@ d82094,::1,POST,http://localhost:8000/cart/add,1653484488,,200
 0c418c,::1,POST,http://localhost:8000/cart/add,1653484498,,200
 7cb05e,::1,POST,http://localhost:8000/cart,1653484606,,200
 98a3a3,::1,GET,http://localhost:8000/products,1653484786,,200
+430c8e,::1,GET,http://localhost:8000/nouveautes,1653486073,,200
+7a8981,::1,OPTIONS,http://localhost:8000/login,1653486101,,200
+4bf9b4,::1,POST,http://localhost:8000/login,1653486101,,200
+c4e006,::1,POST,http://localhost:8000/cart,1653486118,,200
+dcc546,::1,POST,http://localhost:8000/cart,1653486136,,200

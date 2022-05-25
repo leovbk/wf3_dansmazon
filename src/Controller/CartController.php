@@ -71,14 +71,46 @@ class CartController extends AbstractController
         return $this->json($newCarts,200, [],['groups' => 'cart:read']);
     }
     /**
-    * @Route("/cart/remove/{id}", name="cart_remove")
+    * @Route("/cart/remove", name="cart_remove")
     */
 
 
-    public function remove($id, CartService $cartService) {
+    public function remove(Request $request, CartRepository $cartRepository, UserRepository $userRepository, ProductRepository $productRepository, EntityManagerInterface $manager) {
+        $user_id = $request->request->get('user_id');
 
-        $cartService->remove($id);
+        
 
-        return $this->redirectToRoute("app_cart");
+        $product_id = $request->request->get('product_id');
+
+        
+
+        $cartProductObject = $cartRepository->findByUserIdProductId($user_id, $product_id);
+
+        
+
+        if(empty($cartProductObject)){
+            $cart = new Cart();
+            $user = $userRepository->find($user_id);          
+            $product = $productRepository->find($product_id);            
+            $cart->setProduct($product);          
+            $cart->setUser($user);
+            $cart->setQuantity(1);
+            $manager->persist($cart);
+            $manager->flush();
+        } else {    
+            $idCart = $cartProductObject[0]->getId();
+            $cartProduct = $cartRepository->find($idCart);
+            $quantity = $cartProduct->getQuantity();
+            $quantity++;
+            $cartProduct->setQuantity($quantity);
+            $manager->persist($cartProduct);
+            $manager->flush();
+        }
+
+        
+
+        $newCarts = $cartRepository->findByUserId($user_id);
+
+        return $this->json($newCarts,200, [],['groups' => 'cart:read']);
     }
 }
