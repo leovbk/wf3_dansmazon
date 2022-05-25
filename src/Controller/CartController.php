@@ -6,6 +6,7 @@ use App\Service\Cart\CartService;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class CartController extends AbstractController
@@ -27,13 +28,15 @@ class CartController extends AbstractController
     * @Route("/cart/add/{id}", name="cart_add")
     */
 
-    public function add($id, CartService $cartService) {
+    public function add($id, CartService $cartService){
 
         $cartService->add($id);
 
-        return $this->redirectToRoute("app_cart");
+        // $fullCart = $cartService->getFullCart();
 
-        //dd($session->get('panier'));
+        // return $this->json($fullCart,200, [],['groups' => 'product:read']);
+
+        return $this->json('okok');
     }
     /**
     * @Route("/cart/remove/{id}", name="cart_remove")

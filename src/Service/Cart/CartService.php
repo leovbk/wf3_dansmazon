@@ -53,6 +53,8 @@ class CartService {
             ];
         }
 
+        dd($panier);
+
         return $panierWithData;
     }
 
