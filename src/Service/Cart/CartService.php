@@ -16,7 +16,7 @@ class CartService {
         $this->productRepo = $productRepo;
     }
 
-    public function add(int $id) {
+    public function add(int $product_id, int ) {
         //$session = $this->session->getSession();
         
         $panier = $this->session->get('panier', []);
@@ -52,8 +52,6 @@ class CartService {
                 'quantity' => $quantity
             ];
         }
-
-        dd($panier);
 
         return $panierWithData;
     }

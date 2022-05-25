@@ -76,38 +76,55 @@ class CartController extends AbstractController
 
 
     public function remove(Request $request, CartRepository $cartRepository, UserRepository $userRepository, ProductRepository $productRepository, EntityManagerInterface $manager) {
-        $user_id = $request->request->get('user_id');
 
-        
+        $user_id = $request->request->get('user_id');
 
         $product_id = $request->request->get('product_id');
 
-        
-
         $cartProductObject = $cartRepository->findByUserIdProductId($user_id, $product_id);
 
-        
+        $idCart = $cartProductObject[0]->getId();
 
-        if(empty($cartProductObject)){
-            $cart = new Cart();
-            $user = $userRepository->find($user_id);          
-            $product = $productRepository->find($product_id);            
-            $cart->setProduct($product);          
-            $cart->setUser($user);
-            $cart->setQuantity(1);
-            $manager->persist($cart);
+        $cartProduct = $cartRepository->find($idCart);
+
+        $quantity = $cartProduct->getQuantity();
+
+        $quantity--;
+
+        if($quantity <= 0) {
+            $manager->remove($cartProduct);
             $manager->flush();
-        } else {    
-            $idCart = $cartProductObject[0]->getId();
-            $cartProduct = $cartRepository->find($idCart);
-            $quantity = $cartProduct->getQuantity();
-            $quantity++;
+        } else {
             $cartProduct->setQuantity($quantity);
-            $manager->persist($cartProduct);
+            $manager->persist($cartProduct);       
             $manager->flush();
         }
 
-        
+        $newCarts = $cartRepository->findByUserId($user_id);
+
+        return $this->json($newCarts,200, [],['groups' => 'cart:read']);
+    }
+
+    /**
+    * @Route("/cart/delete", name="cart_remove")
+    */
+
+
+    public function delete(Request $request, CartRepository $cartRepository, UserRepository $userRepository, ProductRepository $productRepository, EntityManagerInterface $manager) {
+
+        $user_id = $request->request->get('user_id');
+
+        $product_id = $request->request->get('product_id');
+
+        $cartProductObject = $cartRepository->findByUserIdProductId($user_id, $product_id);
+
+        $idCart = $cartProductObject[0]->getId();
+
+        $cartProduct = $cartRepository->find($idCart);
+
+        $manager->remove($cartProduct);
+
+        $manager->flush();
 
         $newCarts = $cartRepository->findByUserId($user_id);
 

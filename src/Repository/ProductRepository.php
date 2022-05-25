@@ -47,18 +47,32 @@ class ProductRepository extends ServiceEntityRepository
         }
     }
 
-   /**
+    /**
     * @return Product[] Returns an array of Product objects
     */
-   public function findNewProduct($number = 10): array
-   {
-       return $this->createQueryBuilder('p')
-           ->orderBy('p.addDate', 'DESC')
-           ->setMaxResults($number)
-           ->getQuery()
-           ->getResult()
-       ;
-   }
+    public function findNewProduct($number = 10): array
+    {
+        return $this->createQueryBuilder('p')
+            ->orderBy('p.addDate', 'DESC')
+            ->setMaxResults($number)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    /**
+    * @return Product[] Returns an array of Product objects
+    */
+    public function findResearch($string): array
+    {
+        return $this->createQueryBuilder('r')
+            ->orWhere('r.title like :val')
+            ->orWhere('r.category.name like :val')
+            ->setParameter('val', '%' . $string . '%')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 
 //    public function findOneBySomeField($value): ?Product
 //    {
