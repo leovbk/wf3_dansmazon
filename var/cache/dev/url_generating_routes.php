@@ -5,7 +5,7 @@
 return [
     'app_admin' => [[], ['_controller' => 'App\\Controller\\AdminController::index'], [], [['text', '/admin']], [], [], []],
     'app_admin_product_create' => [[], ['_controller' => 'App\\Controller\\AdminController::adminProductCreate'], [], [['text', '/admin/product/create']], [], [], []],
-    'app_admin_product_edit' => [['id'], ['_controller' => 'App\\Controller\\AdminController::adminProductEdit'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/admin/product/edit']], [], [], []],
+    'app_admin_product_edit' => [[], ['_controller' => 'App\\Controller\\AdminController::adminProductEdit'], [], [['text', '/admin/product/edit']], [], [], []],
     'app_admin_product_delete' => [['id'], ['_controller' => 'App\\Controller\\AdminController::adminProductDelete'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/admin/product/delete']], [], [], []],
     'app_cart' => [[], ['_controller' => 'App\\Controller\\CartController::index'], [], [['text', '/cart']], [], [], []],
     'cart_add' => [[], ['_controller' => 'App\\Controller\\CartController::add'], [], [['text', '/cart/add']], [], [], []],
