@@ -10,6 +10,7 @@ return [
     [ // $staticRoutes
         '/admin' => [[['_route' => 'app_admin', '_controller' => 'App\\Controller\\AdminController::index'], null, null, null, false, false, null]],
         '/admin/product/create' => [[['_route' => 'app_admin_product_create', '_controller' => 'App\\Controller\\AdminController::adminProductCreate'], null, null, null, false, false, null]],
+        '/admin/product/edit' => [[['_route' => 'app_admin_product_edit', '_controller' => 'App\\Controller\\AdminController::adminProductEdit'], null, null, null, false, false, null]],
         '/cart' => [[['_route' => 'app_cart', '_controller' => 'App\\Controller\\CartController::index'], null, null, null, false, false, null]],
         '/cart/add' => [[['_route' => 'cart_add', '_controller' => 'App\\Controller\\CartController::add'], null, null, null, false, false, null]],
         '/cart/delete' => [[['_route' => 'cart_remove', '_controller' => 'App\\Controller\\CartController::delete'], null, null, null, false, false, null]],
@@ -30,49 +31,45 @@ return [
     ],
     [ // $regexpList
         0 => '{^(?'
-                .'|/admin/product/(?'
-                    .'|edit/([^/]++)(*:38)'
-                    .'|delete/([^/]++)(*:60)'
-                .')'
+                .'|/admin/product/delete/([^/]++)(*:37)'
                 .'|/cartdb/([^/]++)(?'
-                    .'|(*:87)'
-                    .'|/edit(*:99)'
-                    .'|(*:106)'
+                    .'|(*:63)'
+                    .'|/edit(*:75)'
+                    .'|(*:82)'
                 .')'
-                .'|/product/(\\d+)(*:129)'
-                .'|/research/([^/]++)(*:155)'
+                .'|/product/(\\d+)(*:104)'
+                .'|/research/([^/]++)(*:130)'
                 .'|/_(?'
-                    .'|error/(\\d+)(?:\\.([^/]++))?(*:194)'
-                    .'|wdt/([^/]++)(*:214)'
+                    .'|error/(\\d+)(?:\\.([^/]++))?(*:169)'
+                    .'|wdt/([^/]++)(*:189)'
                     .'|profiler/([^/]++)(?'
                         .'|/(?'
-                            .'|search/results(*:260)'
-                            .'|router(*:274)'
+                            .'|search/results(*:235)'
+                            .'|router(*:249)'
                             .'|exception(?'
-                                .'|(*:294)'
-                                .'|\\.css(*:307)'
+                                .'|(*:269)'
+                                .'|\\.css(*:282)'
                             .')'
                         .')'
-                        .'|(*:317)'
+                        .'|(*:292)'
                     .')'
                 .')'
             .')/?$}sDu',
     ],
     [ // $dynamicRoutes
-        38 => [[['_route' => 'app_admin_product_edit', '_controller' => 'App\\Controller\\AdminController::adminProductEdit'], ['id'], null, null, false, true, null]],
-        60 => [[['_route' => 'app_admin_product_delete', '_controller' => 'App\\Controller\\AdminController::adminProductDelete'], ['id'], null, null, false, true, null]],
-        87 => [[['_route' => 'app_cartdb_show', '_controller' => 'App\\Controller\\CartdbController::show'], ['id'], ['GET' => 0], null, false, true, null]],
-        99 => [[['_route' => 'app_cartdb_edit', '_controller' => 'App\\Controller\\CartdbController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        106 => [[['_route' => 'app_cartdb_delete', '_controller' => 'App\\Controller\\CartdbController::delete'], ['id'], ['POST' => 0], null, false, true, null]],
-        129 => [[['_route' => 'app_show', '_controller' => 'App\\Controller\\ProductController::show'], ['id'], ['GET' => 0, 'POST' => 1], null, false, true, null]],
-        155 => [[['_route' => 'app_research', '_controller' => 'App\\Controller\\ProductController::research'], ['research'], null, null, false, true, null]],
-        194 => [[['_route' => '_preview_error', '_controller' => 'error_controller::preview', '_format' => 'html'], ['code', '_format'], null, null, false, true, null]],
-        214 => [[['_route' => '_wdt', '_controller' => 'web_profiler.controller.profiler::toolbarAction'], ['token'], null, null, false, true, null]],
-        260 => [[['_route' => '_profiler_search_results', '_controller' => 'web_profiler.controller.profiler::searchResultsAction'], ['token'], null, null, false, false, null]],
-        274 => [[['_route' => '_profiler_router', '_controller' => 'web_profiler.controller.router::panelAction'], ['token'], null, null, false, false, null]],
-        294 => [[['_route' => '_profiler_exception', '_controller' => 'web_profiler.controller.exception_panel::body'], ['token'], null, null, false, false, null]],
-        307 => [[['_route' => '_profiler_exception_css', '_controller' => 'web_profiler.controller.exception_panel::stylesheet'], ['token'], null, null, false, false, null]],
-        317 => [
+        37 => [[['_route' => 'app_admin_product_delete', '_controller' => 'App\\Controller\\AdminController::adminProductDelete'], ['id'], null, null, false, true, null]],
+        63 => [[['_route' => 'app_cartdb_show', '_controller' => 'App\\Controller\\CartdbController::show'], ['id'], ['GET' => 0], null, false, true, null]],
+        75 => [[['_route' => 'app_cartdb_edit', '_controller' => 'App\\Controller\\CartdbController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        82 => [[['_route' => 'app_cartdb_delete', '_controller' => 'App\\Controller\\CartdbController::delete'], ['id'], ['POST' => 0], null, false, true, null]],
+        104 => [[['_route' => 'app_show', '_controller' => 'App\\Controller\\ProductController::show'], ['id'], ['GET' => 0, 'POST' => 1], null, false, true, null]],
+        130 => [[['_route' => 'app_research', '_controller' => 'App\\Controller\\ProductController::research'], ['research'], null, null, false, true, null]],
+        169 => [[['_route' => '_preview_error', '_controller' => 'error_controller::preview', '_format' => 'html'], ['code', '_format'], null, null, false, true, null]],
+        189 => [[['_route' => '_wdt', '_controller' => 'web_profiler.controller.profiler::toolbarAction'], ['token'], null, null, false, true, null]],
+        235 => [[['_route' => '_profiler_search_results', '_controller' => 'web_profiler.controller.profiler::searchResultsAction'], ['token'], null, null, false, false, null]],
+        249 => [[['_route' => '_profiler_router', '_controller' => 'web_profiler.controller.router::panelAction'], ['token'], null, null, false, false, null]],
+        269 => [[['_route' => '_profiler_exception', '_controller' => 'web_profiler.controller.exception_panel::body'], ['token'], null, null, false, false, null]],
+        282 => [[['_route' => '_profiler_exception_css', '_controller' => 'web_profiler.controller.exception_panel::stylesheet'], ['token'], null, null, false, false, null]],
+        292 => [
             [['_route' => '_profiler', '_controller' => 'web_profiler.controller.profiler::panelAction'], ['token'], null, null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],
