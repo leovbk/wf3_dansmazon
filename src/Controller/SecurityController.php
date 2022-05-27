@@ -41,6 +41,7 @@ class SecurityController extends AbstractController
             $user->setPostalcode($formData['postalcode']);
             $user->setCity($formData['city']);
             $user->setUserfirstname($formData['userfirstname']);
+            $user->setRole('ROLE_USER');
 
             $hash = $encoder->encodePassword($user, $formData["password"]);
 
