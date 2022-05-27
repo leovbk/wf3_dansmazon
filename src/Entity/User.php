@@ -113,6 +113,12 @@ class User implements UserInterface
      */
     private $carts;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Groups("user:read")
+     */
+    private $role;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -272,6 +278,18 @@ class User implements UserInterface
                 $cart->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getRole(): ?string
+    {
+        return $this->role;
+    }
+
+    public function setRole(string $role): self
+    {
+        $this->role = $role;
 
         return $this;
     }
