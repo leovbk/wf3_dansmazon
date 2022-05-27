@@ -19,7 +19,7 @@ class ProductController extends AbstractController
      */
     public function index(ProductRepository $productRepo): Response
     {
-
+        
         $products = $productRepo->findAll();
         
         return $this->json($products, 200, [],['groups' => 'product:read']);
@@ -72,6 +72,19 @@ class ProductController extends AbstractController
         
         return $this->json($nouveautes, 200, [],['groups' => 'product:read']);
     }
+
+    /**
+     * @Route("/research/{research}", name="app_research")
+     */
+    public function research(ProductRepository $productRepo, string $research): Response
+    {
+
+        $result = $productRepo->findResearch($research);
+        
+        return $this->json($result, 200, [],['groups' => 'product:read']);
+    }
+
+
 
 
 }

@@ -6,11 +6,14 @@ use DateTime;
 use App\Entity\Product;
 use App\Form\ProductType;
 use App\Repository\ProductRepository;
+use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AdminController extends AbstractController
@@ -35,58 +38,49 @@ class AdminController extends AbstractController
      * @Route("/admin/product/create", name="app_admin_product_create")
      */
 
-    public function adminProductCreate(Request $request, EntityManagerInterface $manager, SluggerInterface $slugger): Response
+    public function adminProductCreate(Request $request,CategoryRepository $categoryRep,  EntityManagerInterface $manager, SluggerInterface $slugger): Response
     {
+
+        $image = $request->files->get('image');
+
+        $formData = $request->request;
+
+        $category = $categoryRep->find($formData->get('category'));
+
         $product = new Product();
-        
-        $form = $this->createForm(ProductType::class, $product);
 
-        $form->handleRequest($request);
+        $product->setTitle($formData->get('title'));
+        $product->setPrice($formData->get('price'));
+        $product->setContent($formData->get('content'));
+        $product->setCategory($category);
+        $product->setAddDate(new \DateTime());
 
-        if($form->isSubmitted() && $form->isValid()) {
+        $imageOriginalName = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
 
-            $product->setAddDate(new \DateTime());
+        $sluggedFileName =   $slugger->slug($imageOriginalName);
 
-            /** @var UploadedFile $imageFile */
+        $newImageName = $sluggedFileName . '-' . uniqid() .'.'. $image->guessExtension();
 
-            $imageFile = $form->get('image')->getData();
+        try{
 
-            if($imageFile){
+            $image->move( $this->getParameter('image_directory'), $newImageName );
 
-                //On stock le nom orignal du fichier (sans l'extension)
-                $originalName = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
-
-              //On attribut un nom plus propre au ficher
-                $sluggedFileName =   $slugger->slug($originalName);
-
-                $newImageName = $sluggedFileName . '-' . uniqid() .'.'. $imageFile->guessExtension();
-
-                try{
-
-                    $imageFile->move( $this->getParameter('image_directory'), $newImageName );
-
-                }catch(FileException $e){
+        }catch(FileException $e){
                     
-                    return "Erreur: ".  $e->getMessage();
-                }
-
-
-                $product->setImageFileName($newImageName);
-
-            }
-
-            
-
-            $manager->persist($product);
-
-            $manager->flush();
-
-            return $this->redirectToRoute('app_admin');
+            return $this->json($e->getMessage());
         }
 
-        return $this->render('admin/createProduct.html.twig', [
-            'form' => $form->createView(),
-        ]);
+        $product->setImageFileName($newImageName);
+
+        $manager->persist($product);
+
+        $manager->flush();
+
+        // $form->submit($product);
+
+        // return $this->json($product, 200, [],['groups' => 'product:read']);
+
+        return $this->json(true, 200);
 
     }
 
