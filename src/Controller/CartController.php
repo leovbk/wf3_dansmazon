@@ -126,8 +126,6 @@ class CartController extends AbstractController
 
         $manager->flush();
 
-        $newCarts = $cartRepository->findByUserId($user_id);
-
-        return $this->json($newCarts,200, [],['groups' => 'cart:read']);
+        return $this->json(true, 200);
     }
 }
