@@ -85,58 +85,53 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/admin/product/edit/{id}", name="app_admin_product_edit")
+     * @Route("/admin/product/edit", name="app_admin_product_edit")
      */
 
-    public function adminProductEdit(Product $product, Request $request, EntityManagerInterface $manager, SluggerInterface $slugger): Response
+    public function adminProductEdit(ProductRepository $productRepo, Request $request,CategoryRepository $categoryRep,  EntityManagerInterface $manager, SluggerInterface $slugger): Response
     {
-        
-        $form = $this->createForm(ProductType::class, $product);
+        $image = $request->files->get('image');
 
-        $form->handleRequest($request);
+        $formData = $request->request;
 
-        if($form->isSubmitted() && $form->isValid()) {
+        $category = $categoryRep->find($formData->get('category'));
 
-            /** @var UploadedFile $imageFile */
+        $product = $productRepo->find($formData->get('id'));
 
-            $imageFile = $form->get('image')->getData();
+        $product->setTitle($formData->get('title'));
+        $product->setPrice($formData->get('price'));
+        $product->setContent($formData->get('content'));
+        $product->setCategory($category);
+        $product->setAddDate(new \DateTime());
 
-            if($imageFile){
+        $imageOriginalName = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
 
-                //On stock le nom orignal du fichier (sans l'extension)
-                $originalName = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
+        $sluggedFileName =   $slugger->slug($imageOriginalName);
 
-              //On attribut un nom plus propre au ficher
-                $sluggedFileName =   $slugger->slug($originalName);
+        $newImageName = $sluggedFileName . '-' . uniqid() .'.'. $image->guessExtension();
 
-                $newImageName = $sluggedFileName . '-' . uniqid() .'.'. $imageFile->guessExtension();
+        try{
 
-                try{
+        $image->move( $this->getParameter('image_directory'), $newImageName );
 
-                    $imageFile->move( $this->getParameter('image_directory'), $newImageName );
-
-                }catch(FileException $e){
+        }catch(FileException $e){
                     
-                    return "Erreur: ".  $e->getMessage();
-                }
-
-
-                $product->setImageFileName($newImageName);
-
-            }
-
-            
-
-            $manager->persist($product);
-
-            $manager->flush();
-
-            return $this->redirectToRoute('app_admin');
+            return $this->json($e->getMessage());
         }
 
-        return $this->render('admin/createProduct.html.twig', [
-            'form' => $form->createView(),
-        ]);
+        $product->setImageFileName($newImageName);
+
+        $manager->persist($product);
+
+        $manager->flush();
+
+        // $form->submit($product);
+
+        // return $this->json($product, 200, [],['groups' => 'product:read']);
+
+        return $this->json(true, 200);
+
+        // return $this->json($request);
 
     }
 
@@ -150,7 +145,7 @@ class AdminController extends AbstractController
 
         $manager->flush();
 
-        return $this->redirectToRoute('app_admin');
+        return $this->json(true, 200);
     }
     
 }
