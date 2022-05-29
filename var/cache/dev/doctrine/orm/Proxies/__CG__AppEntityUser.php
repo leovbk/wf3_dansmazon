@@ -67,10 +67,10 @@ class User extends \App\Entity\User implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'App\\Entity\\User' . "\0" . 'id', '' . "\0" . 'App\\Entity\\User' . "\0" . 'email', '' . "\0" . 'App\\Entity\\User' . "\0" . 'username', '' . "\0" . 'App\\Entity\\User' . "\0" . 'password', 'confirm_password', '' . "\0" . 'App\\Entity\\User' . "\0" . 'comments', '' . "\0" . 'App\\Entity\\User' . "\0" . 'address', '' . "\0" . 'App\\Entity\\User' . "\0" . 'postalcode', '' . "\0" . 'App\\Entity\\User' . "\0" . 'city', '' . "\0" . 'App\\Entity\\User' . "\0" . 'userfirstname', '' . "\0" . 'App\\Entity\\User' . "\0" . 'carts'];
+            return ['__isInitialized__', '' . "\0" . 'App\\Entity\\User' . "\0" . 'id', '' . "\0" . 'App\\Entity\\User' . "\0" . 'email', '' . "\0" . 'App\\Entity\\User' . "\0" . 'username', '' . "\0" . 'App\\Entity\\User' . "\0" . 'password', 'confirm_password', '' . "\0" . 'App\\Entity\\User' . "\0" . 'comments', '' . "\0" . 'App\\Entity\\User' . "\0" . 'address', '' . "\0" . 'App\\Entity\\User' . "\0" . 'postalcode', '' . "\0" . 'App\\Entity\\User' . "\0" . 'city', '' . "\0" . 'App\\Entity\\User' . "\0" . 'userfirstname', '' . "\0" . 'App\\Entity\\User' . "\0" . 'carts', '' . "\0" . 'App\\Entity\\User' . "\0" . 'role'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'App\\Entity\\User' . "\0" . 'id', '' . "\0" . 'App\\Entity\\User' . "\0" . 'email', '' . "\0" . 'App\\Entity\\User' . "\0" . 'username', '' . "\0" . 'App\\Entity\\User' . "\0" . 'password', 'confirm_password', '' . "\0" . 'App\\Entity\\User' . "\0" . 'comments', '' . "\0" . 'App\\Entity\\User' . "\0" . 'address', '' . "\0" . 'App\\Entity\\User' . "\0" . 'postalcode', '' . "\0" . 'App\\Entity\\User' . "\0" . 'city', '' . "\0" . 'App\\Entity\\User' . "\0" . 'userfirstname', '' . "\0" . 'App\\Entity\\User' . "\0" . 'carts'];
+        return ['__isInitialized__', '' . "\0" . 'App\\Entity\\User' . "\0" . 'id', '' . "\0" . 'App\\Entity\\User' . "\0" . 'email', '' . "\0" . 'App\\Entity\\User' . "\0" . 'username', '' . "\0" . 'App\\Entity\\User' . "\0" . 'password', 'confirm_password', '' . "\0" . 'App\\Entity\\User' . "\0" . 'comments', '' . "\0" . 'App\\Entity\\User' . "\0" . 'address', '' . "\0" . 'App\\Entity\\User' . "\0" . 'postalcode', '' . "\0" . 'App\\Entity\\User' . "\0" . 'city', '' . "\0" . 'App\\Entity\\User' . "\0" . 'userfirstname', '' . "\0" . 'App\\Entity\\User' . "\0" . 'carts', '' . "\0" . 'App\\Entity\\User' . "\0" . 'role'];
     }
 
     /**
@@ -443,6 +443,28 @@ class User extends \App\Entity\User implements \Doctrine\ORM\Proxy\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeCart', [$cart]);
 
         return parent::removeCart($cart);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getRole(): ?string
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getRole', []);
+
+        return parent::getRole();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setRole(string $role): \App\Entity\User
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setRole', [$role]);
+
+        return parent::setRole($role);
     }
 
 }

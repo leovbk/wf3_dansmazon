@@ -31,33 +31,6 @@ class ProductController extends AbstractController
     public function show(Product $product, Request $request, EntityManagerInterface $manager): Response 
     {
 
-        // $comment = new Comment;
-
-        // $formComment = $this->createForm(CommentType::class, $comment);
-
-        // $formComment->handleRequest($request);
-
-        // $id = $product->getId();
-
-        
-
-        // if($formComment->isSubmitted() && $formComment->isValid())
-        // {
-        //     $comment->setCreatedAt(new \DateTime());
-
-        //     $comment->setProduct($product);
-
-        //     $manager->persist($comment);
-
-        //     $manager->flush();
-
-        //     $this->addFlash('primary', "Votre commentaire a bien été ajouté");
-
-        //     $this->redirectToRoute('app_show', [
-        //         'id' => $id
-        //     ]);
-        // }
-
         return $this->json([$product] , 200, [],['groups' => 'product:read']);
 
     }
@@ -80,6 +53,17 @@ class ProductController extends AbstractController
     {
 
         $result = $productRepo->findResearch($research);
+        
+        return $this->json($result, 200, [],['groups' => 'product:read']);
+    }
+
+    /**
+     * @Route("/products/categories/{id}", name="app_categories")
+     */
+    public function showByCat(ProductRepository $productRepo, $id): Response
+    {
+
+        $result = $productRepo->findByCategory($id);
         
         return $this->json($result, 200, [],['groups' => 'product:read']);
     }

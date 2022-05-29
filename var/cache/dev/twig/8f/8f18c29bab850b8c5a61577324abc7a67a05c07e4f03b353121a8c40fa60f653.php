@@ -1671,6 +1671,6 @@ class __TwigTemplate_c716be7acba5d23b5831e44634d0bd3b83a0246ee56c05c5a23c169f673
         </tbody>
     </table>
 {% endmacro %}
-", "@Doctrine/Collector/db.html.twig", "/Users/macdeleo/Desktop/dansmazone/dansmazone/vendor/doctrine/doctrine-bundle/Resources/views/Collector/db.html.twig");
+", "@Doctrine/Collector/db.html.twig", "/Users/macdeleo/Desktop/wf3_dansmazone/wf3_dansmazon/vendor/doctrine/doctrine-bundle/Resources/views/Collector/db.html.twig");
     }
 }

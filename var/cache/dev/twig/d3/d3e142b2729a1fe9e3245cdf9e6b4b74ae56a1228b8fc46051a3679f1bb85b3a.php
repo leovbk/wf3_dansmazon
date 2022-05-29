@@ -1526,6 +1526,6 @@ $context["voter_detail"], "vote", [], "array", false, false, false, 418), twig_c
         </div>
     {% endif %}
 {% endblock %}
-", "@Security/Collector/security.html.twig", "/Users/macdeleo/Desktop/dansmazone/dansmazone/vendor/symfony/security-bundle/Resources/views/Collector/security.html.twig");
+", "@Security/Collector/security.html.twig", "/Users/macdeleo/Desktop/wf3_dansmazone/wf3_dansmazon/vendor/symfony/security-bundle/Resources/views/Collector/security.html.twig");
     }
 }

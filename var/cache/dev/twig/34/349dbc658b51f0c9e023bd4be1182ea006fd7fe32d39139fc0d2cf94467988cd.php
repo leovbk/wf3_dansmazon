@@ -227,6 +227,6 @@ class __TwigTemplate_17736539aac91a37089496cf717fb15a6c3056e6d755ad7b53ef0221ae3
         </div>
     {% endif %}
 {% endblock %}
-", "@WebProfiler/Collector/exception.html.twig", "/Users/macdeleo/Desktop/dansmazone/dansmazone/vendor/symfony/web-profiler-bundle/Resources/views/Collector/exception.html.twig");
+", "@WebProfiler/Collector/exception.html.twig", "/Users/macdeleo/Desktop/wf3_dansmazone/wf3_dansmazon/vendor/symfony/web-profiler-bundle/Resources/views/Collector/exception.html.twig");
     }
 }

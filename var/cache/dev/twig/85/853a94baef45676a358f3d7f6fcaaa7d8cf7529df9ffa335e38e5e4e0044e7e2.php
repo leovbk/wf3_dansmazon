@@ -482,6 +482,6 @@ class __TwigTemplate_57d3fce5f4b42623265502f0fad904016ced69fcd1365f6e6dd84054dfd
         {% endfor %}
     </table>
 {% endmacro %}
-", "@WebProfiler/Collector/events.html.twig", "/Users/macdeleo/Desktop/dansmazone/dansmazone/vendor/symfony/web-profiler-bundle/Resources/views/Collector/events.html.twig");
+", "@WebProfiler/Collector/events.html.twig", "/Users/macdeleo/Desktop/wf3_dansmazone/wf3_dansmazon/vendor/symfony/web-profiler-bundle/Resources/views/Collector/events.html.twig");
     }
 }

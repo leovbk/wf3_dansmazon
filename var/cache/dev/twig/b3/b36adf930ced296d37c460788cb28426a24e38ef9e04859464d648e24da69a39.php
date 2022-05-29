@@ -1349,6 +1349,6 @@ class __TwigTemplate_b4cb927bc6f72e8f09a37116791bbe0261177161474261dc368f1c5e726
         <span>{{ route|default(controller) }}</span>
     {%- endif %}
 {% endmacro %}
-", "@WebProfiler/Collector/request.html.twig", "/Users/macdeleo/Desktop/dansmazone/dansmazone/vendor/symfony/web-profiler-bundle/Resources/views/Collector/request.html.twig");
+", "@WebProfiler/Collector/request.html.twig", "/Users/macdeleo/Desktop/wf3_dansmazone/wf3_dansmazon/vendor/symfony/web-profiler-bundle/Resources/views/Collector/request.html.twig");
     }
 }

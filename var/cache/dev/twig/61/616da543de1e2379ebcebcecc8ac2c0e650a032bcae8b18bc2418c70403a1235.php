@@ -803,6 +803,6 @@ class __TwigTemplate_c7bdb13a08682c6d51c701f5566a401ccfedc4dafb15a34ea3aa5635ee7
         </table>
     {% endif %}
 {% endblock %}
-", "@WebProfiler/Collector/config.html.twig", "/Users/macdeleo/Desktop/dansmazone/dansmazone/vendor/symfony/web-profiler-bundle/Resources/views/Collector/config.html.twig");
+", "@WebProfiler/Collector/config.html.twig", "/Users/macdeleo/Desktop/wf3_dansmazone/wf3_dansmazon/vendor/symfony/web-profiler-bundle/Resources/views/Collector/config.html.twig");
     }
 }

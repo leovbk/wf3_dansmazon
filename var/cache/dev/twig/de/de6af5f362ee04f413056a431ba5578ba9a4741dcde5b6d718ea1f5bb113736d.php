@@ -122,6 +122,6 @@ class __TwigTemplate_5aab64cd902c7ae5aff00fb5381cb60c992fe415abf810cbd5366189d61
         {% endfor %}
     </tbody>
 </table>
-", "@WebProfiler/Profiler/table.html.twig", "/Users/macdeleo/Desktop/dansmazone/dansmazone/vendor/symfony/web-profiler-bundle/Resources/views/Profiler/table.html.twig");
+", "@WebProfiler/Profiler/table.html.twig", "/Users/macdeleo/Desktop/wf3_dansmazone/wf3_dansmazon/vendor/symfony/web-profiler-bundle/Resources/views/Profiler/table.html.twig");
     }
 }

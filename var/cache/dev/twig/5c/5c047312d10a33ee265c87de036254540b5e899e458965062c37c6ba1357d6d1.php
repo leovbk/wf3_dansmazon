@@ -168,6 +168,6 @@ class __TwigTemplate_bedfb1c6c6b05b0efacda8bc56f296952642e93faa45c77229328b4cddb
 
     {{ include('@WebProfiler/Profiler/toolbar_item.html.twig', { link: false }) }}
 {% endblock %}
-", "@WebProfiler/Collector/ajax.html.twig", "/Users/macdeleo/Desktop/dansmazone/dansmazone/vendor/symfony/web-profiler-bundle/Resources/views/Collector/ajax.html.twig");
+", "@WebProfiler/Collector/ajax.html.twig", "/Users/macdeleo/Desktop/wf3_dansmazone/wf3_dansmazon/vendor/symfony/web-profiler-bundle/Resources/views/Collector/ajax.html.twig");
     }
 }

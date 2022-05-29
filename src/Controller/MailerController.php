@@ -18,6 +18,10 @@ class MailerController extends AbstractController
     {
         $content = json_decode($request->getContent(), true);
 
+        if($content['email'] == null|| $content['username'] == null|| $content['message'] == null){
+            return $this->json(false, 200);
+        }
+
         
         $email = (new Email())
             ->from($content['email'])
