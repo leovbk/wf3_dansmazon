@@ -227,6 +227,6 @@ class __TwigTemplate_30af26cdff6a7ba6657bfd28e91ee5f720d65d5796fa9a37b3ec8c070f5
         </div>
     </form>
 </div>
-", "@WebProfiler/Profiler/search.html.twig", "/Users/macdeleo/Desktop/dansmazone/dansmazone/vendor/symfony/web-profiler-bundle/Resources/views/Profiler/search.html.twig");
+", "@WebProfiler/Profiler/search.html.twig", "/Users/macdeleo/Desktop/wf3_dansmazone/wf3_dansmazon/vendor/symfony/web-profiler-bundle/Resources/views/Profiler/search.html.twig");
     }
 }

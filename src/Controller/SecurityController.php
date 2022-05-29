@@ -29,7 +29,7 @@ class SecurityController extends AbstractController
 
         $form = $this->createForm(RegistrationType::class, $user);
 
-        $form->handleRequest($request);
+        // $form->handleRequest($request);
 
         $form->submit($formData);
 
@@ -104,15 +104,15 @@ class SecurityController extends AbstractController
         
 
 
-        return $this->json($session,200, [],['groups' => 'user:read']);
+        return $this->json(['session' => $session, 'validation' => true],200, [],['groups' => 'user:read']);
     }
 
-    /**
-     * @Route("/logout", name="app_logout")
-     */
-    public function logout(): void
-    {
+    // /**
+    //  * @Route("/logout", name="app_logout")
+    //  */
+    // public function logout(): void
+    // {
         
-    }
+    // }
 
 }

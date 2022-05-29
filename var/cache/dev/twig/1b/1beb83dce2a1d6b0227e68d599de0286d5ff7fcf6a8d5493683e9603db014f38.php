@@ -413,6 +413,6 @@ class __TwigTemplate_d071873dd74330fffbf22700551c0d3f2d57b1052086bff9351ca307446
         </div>
     {% endfor %}
 {% endblock %}
-", "@Debug/Profiler/dump.html.twig", "/Users/macdeleo/Desktop/dansmazone/dansmazone/vendor/symfony/debug-bundle/Resources/views/Profiler/dump.html.twig");
+", "@Debug/Profiler/dump.html.twig", "/Users/macdeleo/Desktop/wf3_dansmazone/wf3_dansmazon/vendor/symfony/debug-bundle/Resources/views/Profiler/dump.html.twig");
     }
 }
